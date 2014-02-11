@@ -4,6 +4,8 @@ Windows shell provisioning script to bootstrap Ansible from within a Vagrant VM 
 
 This script is configured to use configure RHEL-based VM (Fedora, CentOS, etc.) so it can run Ansible playbooks from within the VM through Vagrant.
 
+Read more about this script, and other techniques for using Ansible within a Windows environment, on Server Check.in: [Running Ansible within Windows](https://servercheck.in/blog/running-ansible-within-windows).
+
 ## Usage
 
 In your Vagrantfile, use a conditional provisioning statement if you want to use this script (which runs Ansible from within the VM instead of on your host—this example assumes your playbook and the inventory file are all within a 'provisioning' folder, and this script is within provisioning/JJG-Ansible-Windows):
