@@ -38,7 +38,7 @@ if [ ! -f /usr/bin/ansible ]; then
   # Make sure setuptools are installed crrectly.
   pip install setuptools --no-use-wheel --upgrade
   echo "Installing required python modules."
-  pip install paramiko pyyaml jinja2
+  pip install paramiko pyyaml jinja2 markupsafe
   echo "Installing Ansible."
   pip install ansible
 fi
