@@ -8,7 +8,7 @@ Read more about this script, and other techniques for using Ansible within a Win
 
 ## Usage
 
-In your Vagrantfile, use a conditional provisioning statement if you want to use this script (which runs Ansible from within the VM instead of on your host—this example assumes your playbook and the inventory file are all within a 'provisioning' folder, and this script is within provisioning/JJG-Ansible-Windows):
+In your Vagrantfile, use a conditional provisioning statement if you want to use this script (which runs Ansible from within the VM instead of on your host—this example assumes your playbook is inside within a 'provisioning' folder, and this script is within provisioning/JJG-Ansible-Windows):
 
 ```ruby
 # Use rbconfig to determine if we're on a windows host or not.
@@ -18,17 +18,18 @@ if is_windows
   # Provisioning configuration for shell script.
   config.vm.provision "shell" do |sh|
     sh.path = "provisioning/JJG-Ansible-Windows/windows.sh"
-    sh.args = "provisioning/playbook.yml provisioning/inventory"
+    sh.args = "provisioning/playbook.yml"
   end
 else
   # Provisioning configuration for Ansible (for Mac/Linux hosts).
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "provisioning/playbook.yml"
-    ansible.inventory_path = "provisioning/inventory"
     ansible.sudo = true
   end
 end
 ```
+
+Note that the `windows.sh` script will run within the VM and will run the given playbook against localhost with `--connection=local` inside the VM. You shouldn't/can't pass a custom inventory file to the script, as you can using Vagrant's Ansible provisioner.
 
 ## Licensing and More Info
 
