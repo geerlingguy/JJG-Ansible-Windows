@@ -31,6 +31,10 @@ end
 
 Note that the `windows.sh` script will run within the VM and will run the given playbook against localhost with `--connection=local` inside the VM. You shouldn't/can't pass a custom inventory file to the script, as you can using Vagrant's Ansible provisioner.
 
+### Role Requirements File
+
+If your playbook requires roles to be installed which are not present in a `roles` directory within the playbook's directory, then you should add the roles to a [role requirements](http://docs.ansible.com/galaxy.html#advanced-control-over-role-requirements-files) file. Place the resulting `requirements.txt` or `requirements.yml` file in the same directory as your playbook, and the roles will be installed automatically.
+
 ## Licensing and More Info
 
 Created by [Jeff Geerling](http://jeffgeerling.com/) in 2014. Licensed under the MIT license; see the LICENSE file for more info.
