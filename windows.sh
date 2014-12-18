@@ -34,4 +34,4 @@ if [ ! -f /usr/bin/ansible ]; then
 fi
 
 echo "Running Ansible provisioner defined in Vagrantfile."
-ansible-playbook all -i 'localhost,' /vagrant/${ANSIBLE_PLAYBOOK} --extra-vars "is_windows=true" --connection=local
+ansible-playbook -i 'localhost,' /vagrant/${ANSIBLE_PLAYBOOK} --extra-vars "is_windows=true" --connection=local
