@@ -11,8 +11,7 @@
 
 ANSIBLE_PLAYBOOK=$1
 PLAYBOOK_DIR=${ANSIBLE_PLAYBOOK%/*}
-ROLE_REQUIREMENTS=$(find /vagrant/$PLAYBOOK_DIR -regextype posix-extended\
-  -iregex ".*/requirements.(txt|yml)" )
+ROLE_REQUIREMENTS=$(find /vagrant/$PLAYBOOK_DIR -name "requirements.yml" -o -name "requirements.txt" )
 
 # Detect package management system.
 YUM=$(which yum)
