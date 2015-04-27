@@ -50,7 +50,7 @@ fi
 # Install Ansible roles from requirements file, if available.
 if [ -f /vagrant/requirements.txt ]; then
   sudo ansible-galaxy install -r /vagrant/requirements.txt
-elif [-f /vagrant/requirements.yml ]; then
+elif [ -f /vagrant/requirements.yml ]; then
   sudo ansible-galaxy install -r /vagrant/requirements.yml
 fi
 
