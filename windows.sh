@@ -36,7 +36,7 @@ if [ ! -f /usr/bin/ansible ]; then
   fi
 
   echo "Installing pip via easy_install."
-  wget http://peak.telecommunity.com/dist/ez_setup.py
+  wget https://raw.githubusercontent.com/ActiveState/ez_setup/v0.9/ez_setup.py
   python ez_setup.py && rm -f ez_setup.py
   easy_install pip
   # Make sure setuptools are installed crrectly.
