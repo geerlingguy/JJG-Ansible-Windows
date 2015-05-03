@@ -10,6 +10,8 @@
 # export {http,https,ftp}_proxy='http://username:password@proxy-host:80'
 
 ANSIBLE_PLAYBOOK=$1
+PLAYBOOK_DIR=${ANSIBLE_PLAYBOOK%/*}
+ROLE_REQUIREMENTS=$(find /vagrant/$PLAYBOOK_DIR -name "requirements.yml" -o -name "requirements.txt" )
 
 # Detect package management system.
 YUM=$(which yum)
@@ -48,10 +50,9 @@ if [ ! -f /usr/bin/ansible ]; then
 fi
 
 # Install Ansible roles from requirements file, if available.
-if [ -f /vagrant/requirements.txt ]; then
-  sudo ansible-galaxy install -r /vagrant/requirements.txt
-elif [ -f /vagrant/requirements.yml ]; then
-  sudo ansible-galaxy install -r /vagrant/requirements.yml
+if [ -f $ROLE_REQUIREMENTS ]; then
+  echo "Found Ansible role file at $ROLE_REQUIREMENTS"
+  sudo ansible-galaxy install -r ${ROLE_REQUIREMENTS}
 fi
 
 # Run the playbook.
