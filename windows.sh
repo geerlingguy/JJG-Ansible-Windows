@@ -50,9 +50,9 @@ if [ ! -f /usr/bin/ansible ]; then
 fi
 
 # Install Ansible roles from requirements file, if available.
-if [ -f $ROLE_REQUIREMENTS ]; then
+if [ -f "$ROLE_REQUIREMENTS" ]; then
   echo "Found Ansible role file at $ROLE_REQUIREMENTS"
-  sudo ansible-galaxy install -r ${ROLE_REQUIREMENTS}
+  sudo ansible-galaxy install -r "${ROLE_REQUIREMENTS}"
 fi
 
 # Run the playbook.
