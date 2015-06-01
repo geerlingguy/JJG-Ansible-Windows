@@ -11,14 +11,13 @@
 
 ANSIBLE_PLAYBOOK=$1
 PLAYBOOK_DIR=${ANSIBLE_PLAYBOOK%/*}
-ROLE_REQUIREMENTS=$(find /vagrant/$PLAYBOOK_DIR -name "requirements.yml" -o -name "requirements.txt")
 
 # Detect package management system.
-YUM=$(which yum)
-APT_GET=$(which apt-get)
+YUM=$(which yum 2>/dev/null)
+APT_GET=$(which apt-get 2>/dev/null)
 
 # Make sure Ansible playbook exists.
-if [ ! -f /vagrant/$ANSIBLE_PLAYBOOK ]; then
+if [ ! -f "/vagrant/$ANSIBLE_PLAYBOOK" ]; then
   echo "Cannot find Ansible playbook."
   exit 1
 fi
@@ -26,9 +25,9 @@ fi
 # Install Ansible and its dependencies if it's not installed already.
 if [ ! -f /usr/bin/ansible ]; then
   echo "Installing Ansible dependencies and Git."
-  if [[ ! -z $YUM ]]; then
+  if [[ ! -z ${YUM} ]]; then
     yum install -y git python python-devel
-  elif [[ ! -z $APT_GET ]]; then
+  elif [[ ! -z ${APT_GET} ]]; then
     apt-get install -y git python python-dev
   else
     echo "Neither yum nor apt-get are available."
@@ -49,12 +48,10 @@ if [ ! -f /usr/bin/ansible ]; then
   pip install ansible
 fi
 
-# Install Ansible roles from requirements file, if available.
-if [ -f "$ROLE_REQUIREMENTS" ]; then
-  echo "Found Ansible role file at $ROLE_REQUIREMENTS"
-  sudo ansible-galaxy install -r "${ROLE_REQUIREMENTS}"
-fi
+# Install requirements.
+echo "Installing Ansible roles from requirements file, if available."
+find "/vagrant/$PLAYBOOK_DIR" \( -name "requirements.yml" -o -name "requirements.txt" \) -exec sudo ansible-galaxy install -r {} \;
 
 # Run the playbook.
 echo "Running Ansible provisioner defined in Vagrantfile."
-ansible-playbook -i 'localhost,' /vagrant/${ANSIBLE_PLAYBOOK} --extra-vars "is_windows=true" --connection=local
+ansible-playbook -i 'localhost,' "/vagrant/${ANSIBLE_PLAYBOOK}" --extra-vars "is_windows=true" --connection=local
