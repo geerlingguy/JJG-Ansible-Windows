@@ -28,7 +28,8 @@ if ! command -v ansible >/dev/null; then
   if [[ ! -z ${YUM} ]]; then
     yum install -y git python python-devel
   elif [[ ! -z ${APT_GET} ]]; then
-    apt-get install -y git python python-dev
+    # We have to run apt-get update to update outdated apt cache on some vagrant boxes
+    apt-get update && apt-get install -y git python python-dev
   else
     echo "Neither yum nor apt-get are available."
     exit 1;
