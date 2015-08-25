@@ -39,15 +39,17 @@ if ! command -v ansible >/dev/null; then
   wget https://raw.githubusercontent.com/ActiveState/ez_setup/v0.9/ez_setup.py
   python ez_setup.py && rm -f ez_setup.py
   easy_install pip
+
   # Make sure setuptools are installed crrectly.
   pip install setuptools --no-use-wheel --upgrade
 
-  # install gcc
+  # Install GCC / required build tools.
   if [[ ! -z $YUM ]]; then
     yum install -y gcc
   elif [[ ! -z $APT_GET ]]; then
     apt-get install -y build-essential
   fi
+
   echo "Installing required python modules."
   pip install paramiko pyyaml jinja2 markupsafe
 
