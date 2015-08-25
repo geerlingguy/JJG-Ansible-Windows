@@ -42,6 +42,12 @@ if ! command -v ansible >/dev/null; then
   # Make sure setuptools are installed crrectly.
   pip install setuptools --no-use-wheel --upgrade
 
+  # install gcc
+  if [[ ! -z $YUM ]]; then
+    yum install -y gcc
+  elif [[ ! -z $APT_GET ]]; then
+    apt-get install -y build-essential
+  fi
   echo "Installing required python modules."
   pip install paramiko pyyaml jinja2 markupsafe
 
