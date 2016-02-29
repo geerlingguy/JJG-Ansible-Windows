@@ -17,6 +17,7 @@ while (($#)); do
   case $1 in
     --extra-vars=*) extra_vars+=("${1#*=}") ;;
     --extra-vars|-e) shift; extra_vars+=("$1") ;;
+    -*) echo "invalid option: $1" >&2; exit 1 ;;
     *) args+=("$1") ;;
   esac
   shift
