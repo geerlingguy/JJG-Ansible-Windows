@@ -52,13 +52,9 @@ if ! command -v ansible >/dev/null; then
     exit 1;
   fi
 
-  echo "Installing pip via easy_install."
-  wget https://raw.githubusercontent.com/ActiveState/ez_setup/v0.9/ez_setup.py
-  python ez_setup.py && rm -f ez_setup.py
-  easy_install pip
-
-  # Make sure setuptools are installed crrectly.
-  pip install setuptools --no-use-wheel --upgrade
+  echo "Installing pip."
+  wget https://bootstrap.pypa.io/get-pip.py
+  python get-pip.py && rm -f get-pip.py
 
   # Install GCC / required build tools.
   if [[ ! -z $YUM ]]; then
