@@ -1,6 +1,6 @@
 # JJG-Ansible-Windows
 
-> **Important Note**: Vagrant now includes an [`ansible_local` provisioner](https://docs.vagrantup.com/v2/provisioning/ansible_local.html), which provides a much more reliable Ansible provisioning experience within a Vagrant VM. This project will likely no longer be updated for use beyond Vagrant 1.7.x.
+> **Important Note**: Vagrant now includes an [`ansible_local` provisioner](https://docs.vagrantup.com/v2/provisioning/ansible_local.html), which provides a much more reliable Ansible provisioning experience within a Vagrant VM. This project will no longer be updated for use beyond Vagrant 1.8.1.
 
 Windows shell provisioning script to bootstrap Ansible from within a Vagrant VM running on Windows.
 
